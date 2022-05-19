@@ -50,3 +50,13 @@ li {
   padding: 5px;
   margin: 5px;
 }
+
+.repo-detail-container {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  background-color: #dedede;
+  padding: 10px;
+  margin-top: 25px;
+  min-width: 300px;
+}
