@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 
 const RepoDetails = ({ repos, repoToDetail, setRepoToDetail }) => {
   const repo = repos.filter((item) => item.full_name === repoToDetail)[0];
 
   const [commitDetails, setCommitDetails] = useState(null);
+  const [readmeDetails, setReadmeDetails] = useState(null);
 
-  // fetch commit details for repo
+  // fetch commit and readme details for repo
   useEffect(() => {
     const fetchCommitDetails = async () => {
       const response = await fetch(
@@ -31,7 +33,19 @@ const RepoDetails = ({ repos, repoToDetail, setRepoToDetail }) => {
       }
     };
 
+    const fetchReadmeDetails = async () => {
+      const response = await fetch(
+        `https://raw.githubusercontent.com/${repo.full_name}/master/README.md`
+      );
+
+      if (response.ok) {
+        const data = await response.text();
+        setReadmeDetails(data);
+      }
+    };
+
     fetchCommitDetails();
+    fetchReadmeDetails();
   }, [repo.full_name]);
 
   return (
@@ -39,6 +53,7 @@ const RepoDetails = ({ repos, repoToDetail, setRepoToDetail }) => {
       <h2>{repo.name}</h2>
       <p>Last Commit</p>
       {commitDetails && <CommitDisplay commitDetails={commitDetails} />}
+      {readmeDetails && <ReactMarkdown>{readmeDetails}</ReactMarkdown>}
       <button
         onClick={() => {
           setRepoToDetail(null);
