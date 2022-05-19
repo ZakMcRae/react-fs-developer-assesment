@@ -41,3 +41,12 @@ li {
   align-self: center;
   justify-content: center;
 }
+
+.language-filter {
+  margin: 25px;
+}
+
+.language-filter button {
+  padding: 5px;
+  margin: 5px;
+}
