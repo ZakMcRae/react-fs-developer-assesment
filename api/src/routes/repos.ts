@@ -28,6 +28,9 @@ repos.get('/', async (_: Request, res: Response) => {
 
   res.status(200);
 
+  // set return data content type to json
+  res.header('content-type', 'application/json');
+
   // return filterd data
   res.json(filteredRepoData);
 });
