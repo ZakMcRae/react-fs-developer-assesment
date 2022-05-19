@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.css';
+import ReposList from './components/ReposList';
 
 export function App() {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -23,14 +24,15 @@ export function App() {
       }
     };
 
-    fetchData();
+    // set small delay so loading screen doesn't show for a fraction of a second and dispapear
+    setTimeout(fetchData, 1000);
   }, []);
 
   return (
     <div className="App">
       {/* temporary component to display loading state and repo data */}
-      {isLoading && <p>Fetching Data...</p>}
-      {repoData && <p>{JSON.stringify(repoData)}</p>}
+      {isLoading && <div className="loading-screen">Fetching Data...</div>}
+      {repoData && <ReposList repos={repoData} />}
     </div>
   );
 }
