@@ -21,8 +21,13 @@ repos.get('/', async (_: Request, res: Response) => {
   // combine local and github data
   const combinedRepoData = [...localRepoData, ...githubRepoData];
 
+  // filter data where repositoy.fork is false
+  const filteredRepoData = combinedRepoData.filter(
+    (repo) => repo.fork === false
+  );
+
   res.status(200);
 
-  // currently just returning all data combined
-  res.json(combinedRepoData);
+  // return filterd data
+  res.json(filteredRepoData);
 });
