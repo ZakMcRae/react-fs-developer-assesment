@@ -53,7 +53,9 @@ const RepoDetails = ({ repos, repoToDetail, setRepoToDetail }) => {
       <h2>{repo.name}</h2>
       <p>Last Commit</p>
       {commitDetails && <CommitDisplay commitDetails={commitDetails} />}
-      {readmeDetails && <ReactMarkdown>{readmeDetails}</ReactMarkdown>}
+      {readmeDetails && (
+        <ReactMarkdown className="markdown">{readmeDetails}</ReactMarkdown>
+      )}
       <button
         onClick={() => {
           setRepoToDetail(null);
